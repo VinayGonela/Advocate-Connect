@@ -28,7 +28,7 @@ return (
                 posts.map(({ id, questions})=>(
                     <Post 
                         key = {id}
-                        id = {id}
+                        Id = {id}
                         question= {questions.question}
                         timestamp= {questions.timestamp}
                         queryUser = {questions.user}
