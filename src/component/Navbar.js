@@ -12,7 +12,7 @@ import Modal from "react-modal";
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import firebase from 'firebase';
-
+import SpecificationsCard from "./SpecificationsCard";
 
 
 function Navbar() {
@@ -91,8 +91,8 @@ function Navbar() {
                                     <p>{user.displayName?user.displayName:user.email} , asked </p>
                                     <div className = "modal_scope">
                                         <PeopleOutlineIcon />
-                                        <p>Public</p>
-                                        <ExpandMoreIcon />
+                                        <SpecificationsCard/>
+                                       
                                     </div>
                                 </div>
                                 <div className = "modal_field">
