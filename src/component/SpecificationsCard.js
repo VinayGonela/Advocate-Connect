@@ -1,41 +1,4 @@
-/*import React, {useState} from 'react'
-import { Dropdown} from 'react-bootstrap';
 
-function SpecificationsCard() {
-    
-  return (
-    <div className="dropdown">
-        <Dropdown>
-        <Dropdown.Toggle 
-        variant="secondary btn-sm" 
-        id="dropdown-basic">
-            Specifications
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu style={{backgroundColor:'lightgrey'}}>
-            <Dropdown.Item  >Family</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Civil</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Banking</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Criminal</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Employment</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Business</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Cyber</Dropdown.Item>
-            <br />
-            <Dropdown.Item >Others</Dropdown.Item>
-        </Dropdown.Menu>
-        </Dropdown>
-</div>
-  )
-}
-
-export default SpecificationsCard;
-*/
 import React,{useState} from 'react';
 import DropdownButton from 'react-bootstrap/DropdownButton';
 import Dropdown from 'react-bootstrap/Dropdown';
