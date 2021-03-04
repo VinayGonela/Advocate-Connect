@@ -13,18 +13,19 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import firebase from 'firebase';
 import SpecificationsCard from "./SpecificationsCard";
-
+import Specifications from "./Specifications";
 
 function Navbar() {
-     
+    
     const user = useSelector(selectUser)
     const[openModal, setOpenModal] = useState(false)
     const [input,setInput] = useState("")
-
+    const[modalOpen, setModalOpen] = useState(false)
     const handleQuestion = (e) => {
         e.preventDefault()
 
         setOpenModal(false)
+        setModalOpen(false)
 
         db.collection('questions').add({
             question: input,
@@ -52,7 +53,33 @@ function Navbar() {
                     </div>
                     
                     <div className = 'aHeader_icon'>
-                        <CategoryIcon />
+                        <CategoryIcon onClick={() => setModalOpen(true)}/>
+                        <Modal
+                        isOpen = {modalOpen}
+                            onRequestClose = {() => setModalOpen(false)}
+                            shouldCloseOnOverlayClick={true}
+                            style = {{
+                                overlay:{
+                                width:700,
+                                height:600,
+                                backgroundColor:"rgba(0,0,0,8)",
+                                zIndex: "1000",
+                                top:"55%",
+                                left:"45%",
+                                marginTop: "-300px",
+                                marginLeft:"-350px"
+                            },
+                                 }}
+                            >
+                            <div className = "modal_category">
+                            <Specifications />
+
+                            
+                            </div>
+                            <div className = "category_button">
+                            <Button className = "cancel"onClick= {()=> setModalOpen(false)}>Close</Button>
+                            </div>
+                        </Modal>
                     </div>
 
                     <div className = 'aHeader_icon'>
@@ -91,8 +118,8 @@ function Navbar() {
                                     <p>{user.displayName?user.displayName:user.email} , asked </p>
                                     <div className = "modal_scope">
                                         <PeopleOutlineIcon />
-                                        <SpecificationsCard/>
-                                       
+                                        <SpecificationsCard />
+                                        
                                     </div>
                                 </div>
                                 <div className = "modal_field">
