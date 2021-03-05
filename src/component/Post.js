@@ -121,7 +121,7 @@ function Post(  {Id, question, timestamp, queryUser}
                                 overlay:{
                                 width:700,
                                 height:500,
-                                backgroundColor:"rgba(0,0,0,8)",
+                                backgroundColor:"#E0B394",
                                 zIndex: "1000",
                                 top:"55%",
                                 left:"45%",
@@ -201,10 +201,10 @@ function Post(  {Id, question, timestamp, queryUser}
                       alt="" />
             </div>
             <div className="post_footer">
-                <ChatBubbleOutlineOutlinedIcon 
+                <Button
                  onClick = {() => setIsOpenModal(true)} 
-                 className="post_btnBid"
-                />
+                 className="post_btnBid"> Advocate Bid
+                 </Button>
                 <Modal
                             isOpen = {openIsModal}
                             onRequestClose = {() => setIsOpenModal(false)}
@@ -213,7 +213,7 @@ function Post(  {Id, question, timestamp, queryUser}
                                 overlay:{
                                 width:700,
                                 height:500,
-                                backgroundColor:"rgba(0,0,0,8)",
+                                backgroundColor:"#E0B394",
                                 zIndex: "1000",
                                 top:"55%",
                                 left:"45%",
