@@ -15,6 +15,7 @@ import firebase from 'firebase';
 import SpecificationsCard from "./SpecificationsCard";
 import Specifications from "./Specifications";
 import advocate1 from './advocate1.png';
+import LabelIcon from '@material-ui/icons/Label';
 
 
 function Navbar() {
@@ -125,9 +126,9 @@ function Navbar() {
                                     <Avatar className="avatar"
                                             src={user.photo}
                                     />
-                                    <p>{user.displayName?user.displayName:user.email} , asked </p>
+                                    <h5>asking a question as  {user.displayName?user.displayName:user.email} </h5>
                                     <div className = "modal_scope">
-                                        <PeopleOutlineIcon />
+                                        <LabelIcon />
                                         <SpecificationsCard />
                                         
                                     </div>
