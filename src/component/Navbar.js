@@ -14,6 +14,8 @@ import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import firebase from 'firebase';
 import SpecificationsCard from "./SpecificationsCard";
 import Specifications from "./Specifications";
+import advocate1 from './advocate1.png';
+
 
 function Navbar() {
     
@@ -38,14 +40,22 @@ function Navbar() {
     
     return (
         <div className = 'aHeader'>
-            <div className = 'aHeader_logo'>
-                <h1 className = 'line_1'>Advocate</h1>
-                <h2 className = 'line_2'>Connect</h2>
-                <img 
-                src = ''
+            <div className= 'img_Logo'>
+            <img align="left"
+                src = {advocate1}
                 alt = ''
                 />
             </div>
+            <div> 
+                <br/>
+            </div>
+            <div className = 'aHeader_logo'>
+            
+                    <h1  align="center" color="red"> Advocate-Connect</h1>
+                
+                
+                 </div>
+                 
                 <div className = 'aHeader_icons'>
                   
                     <div className = 'aHeader_icon'>
@@ -62,7 +72,7 @@ function Navbar() {
                                 overlay:{
                                 width:700,
                                 height:600,
-                                backgroundColor:"rgba(0,0,0,8)",
+                                backgroundColor:"#E0B394",
                                 zIndex: "1000",
                                 top:"55%",
                                 left:"45%",
@@ -91,7 +101,7 @@ function Navbar() {
                     </div>
 
                     <div className = 'aHeader_icon'>
-                        <Avatar onClick = {() => auth.signOut()} src={user.photo} />
+                        <Avatar className="avatar" align="center" margin-top= "5PX" onClick = {() => auth.signOut()} src={user.photo} />
                         <Modal
                             isOpen = {openModal}
                             onRequestClose = {() => setOpenModal(false)}
@@ -100,7 +110,7 @@ function Navbar() {
                                 overlay:{
                                 width:700,
                                 height:500,
-                                backgroundColor:"rgba(0,0,0,8)",
+                                backgroundColor:"#E0B394",
                                 zIndex: "1000",
                                 top:"55%",
                                 left:"45%",

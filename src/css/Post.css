@@ -116,7 +116,8 @@
     border:none;
     margin-top: 5PX;
     outline: none;
-    color:grey;
+    color:black;
+    background-color:#98BDD6 ;
     font-weight: 500;
     padding: 10px;
     margin-right: 10px;
@@ -127,11 +128,30 @@
   border :none;
    outline: none;
    margin-top: 5px;
-   background-color: blue;
+   background-color: #95AFDE;
    color:black;
    font-weight: 700;
    padding: 10px;
    margin-right: 10px;
    border-radius: 33px;
    cursor: pointer;
+}
+
+.modal_bid{
+    display:flex;
+    padding-top:20px;
+    flex:1
+}
+
+.modal_bid> textarea{
+    width: 100%;
+    height:200px;
+    padding: 5px;
+    font-size: 20px;
+    color:rgb(66, 66, 211);
+}
+
+.post_footer>.post_btnBid{
+    background-color: rgb(168, 135, 222);
+    cursor: pointer;
 }

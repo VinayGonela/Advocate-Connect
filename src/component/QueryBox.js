@@ -11,10 +11,13 @@ function QueryBox() {
         <div className= 'queryBox'>
             <div className='queryBox_info'>
                 <Avatar src={user.photo}/>
-                <h5>{user.displayName ? user.displayName : user.email}</h5>
+            <p> Hello, {user.displayName ? user.displayName : user.email} </p>
             </div>
             <div className="queryBox_query">
-                    <p>Enter Your Issue or Query here...</p>
+
+            <p>Welcome to Advocate Connect</p>
+            
+                    
             </div>
         </div>
     )
