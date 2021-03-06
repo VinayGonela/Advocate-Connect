@@ -1,6 +1,7 @@
 import React, { useState }from 'react';
 import "./Login.css"
 import { auth, provider } from "../../firebase";
+
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -40,6 +41,7 @@ function Login() {
     };
     return (
         <div className="login">
+          
           <div className="login__container">
             <div className="login__logo">
               <img
