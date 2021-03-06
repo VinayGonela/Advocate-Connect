@@ -52,6 +52,16 @@ height:80px;
     padding: 5px;
     cursor: pointer;
 }
+.aHeader_icon >.signout_Btn{
+
+color:rgb(21, 223, 155);
+}
+.aHeader_icon >.signout_Btn:hover{
+
+  color:rgb(15, 155, 108);
+  background-color: lightgrey;
+  cursor: pointer;
+  }
 #sbut{
     cursor: pointer;
     padding: 3px 5px;

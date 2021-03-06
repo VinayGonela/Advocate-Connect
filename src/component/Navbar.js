@@ -9,13 +9,13 @@ import { selectUser } from '../features/userSlice';
 import {  useSelector } from 'react-redux';
 import db, { auth } from '../firebase';
 import Modal from "react-modal";
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import PeopleOutlineIcon from '@material-ui/icons/PeopleOutline';
 import firebase from 'firebase';
 import SpecificationsCard from "./SpecificationsCard";
 import Specifications from "./Specifications";
 import advocate1 from './advocate1.png';
 import LabelIcon from '@material-ui/icons/Label';
+
+
 
 
 function Navbar() {
@@ -24,11 +24,13 @@ function Navbar() {
     const[openModal, setOpenModal] = useState(false)
     const [input,setInput] = useState("")
     const[modalOpen, setModalOpen] = useState(false)
+    const[modalIsOpen, setModalIsOpen] = useState(false)
     const handleQuestion = (e) => {
         e.preventDefault()
 
         setOpenModal(false)
         setModalOpen(false)
+        setModalIsOpen(false)
 
         db.collection('questions').add({
             question: input,
@@ -60,7 +62,54 @@ function Navbar() {
                 <div className = 'aHeader_icons'>
                   
                     <div className = 'aHeader_icon'>
-                        <HomeIcon  />
+                        <HomeIcon onClick={() => setModalIsOpen(true)}/>
+                        <Modal
+                        isOpen = {modalIsOpen}
+                            onRequestClose = {() => setModalIsOpen(false)}
+                            shouldCloseOnOverlayClick={true}
+                            style = {{
+                                overlay:{
+                                width:1000,
+                                height:605,
+                                backgroundColor:"#E0B394",
+                                zIndex: "1000",
+                                top:"55%",
+                                left:"45%",
+                                marginTop: "-300px",
+                                marginLeft:"-450px"
+                            },
+                                 }}
+                            >
+                                
+                                <div className = "modal_category">
+                                <img
+                                align="right"
+                                src = {advocate1}
+                                />
+                                <br/>
+            <h3 align = 'center'><u>About Us</u></h3>
+            <br/><br/><br/>
+            <div><p font = "bold">
+            Welcome to Advocate Connect, your number one source to get solution for all Legal Queries. We're dedicated to providing you the better & immediate solutions, with a focus on dependability.
+We're working to turn our passion for Legal platform into a booming online era. We hope you get satisfied with our Services as much as we delight offering them to you.
+
+<br/><br/><br/>
+Sincerely,<br/><br/>
+Team,<br/>
+Advocate Connect</p>
+            </div><br/>
+            <div align = "center" >
+                                 To Contact : <br/>
+                                 Mail us @  : advcocateconnect@gmail.com<br/>
+                                 Contact No : +0123456789 
+            </div>
+                      
+                            </div>         
+
+                            <div className = "category_button">
+                            <Button className = "cancel"onClick= {()=> setModalIsOpen(false)}>Close</Button>
+                            </div>
+                        </Modal>
                     </div>
                     
                     <div className = 'aHeader_icon'>
@@ -102,7 +151,8 @@ function Navbar() {
                     </div>
 
                     <div className = 'aHeader_icon'>
-                        <Avatar className="avatar" align="center" margin-top= "5PX" onClick = {() => auth.signOut()} src={user.photo} />
+                        <Avatar className="avatar" align="center" margin-top= "15PX" src={user.photo} />
+                        <Button className="signout_Btn" onClick = {() => auth.signOut()} >SignOut</Button>
                         <Modal
                             isOpen = {openModal}
                             onRequestClose = {() => setOpenModal(false)}
