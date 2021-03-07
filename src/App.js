@@ -15,8 +15,8 @@ function App() {
       if(authUser){
       dispatch(login({
         uid: authUser.uid,
-        photo: authUser.photoURL,
-        display: authUser.displayName,
+        photo: authUser.photoURL? authUser.photoURL : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg",
+        display: authUser.displayName? authUser.displayName: authUser.email,
         email:authUser.email
        }));
 
@@ -24,7 +24,7 @@ function App() {
 
     }
       else {
-      dispatch(logout)
+      dispatch(logout())
      }
     });
     

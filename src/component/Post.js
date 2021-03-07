@@ -30,8 +30,8 @@ function Post(  {Id, question, timestamp, queryUser}
         const [openIsModal, setIsOpenModal] = useState(false)
         const [bid, setBid] = useState("")
         const [getBid,setGetBid] = useState([]);
-        
-
+//         let photo = queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"
+// console.log(photo)
         useEffect(() => {
             if (questionId) {
               db.collection("questions")
@@ -91,6 +91,7 @@ function Post(  {Id, question, timestamp, queryUser}
             setBid("");
             setIsOpenModal(false);
           }; 
+          console.log(queryUser)
           
     return (
         <div className="post"
@@ -101,10 +102,10 @@ function Post(  {Id, question, timestamp, queryUser}
         >
 
             <div className="post_info">
-            <Avatar
-            src = {queryUser.photo}
-            />
-            <h5>{queryUser.displayName?queryUser.displayName:queryUser.email}</h5>
+             <Avatar
+            src = { queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"}
+            /> 
+            <h5>{queryUser.display?queryUser.display:queryUser.email}</h5> 
             <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
             </div>
             <div className="post_body">
@@ -132,11 +133,11 @@ function Post(  {Id, question, timestamp, queryUser}
                         >
                             <div className = "modal_question">
                                 <h1>{question}</h1>
-                                <p>
-                                    asked by{" "} <span className = "name">{queryUser.displayName ? queryUser.displayName: queryUser.email} </span>
+                               <p>
+                                    asked by{" "} <span className = "name">{queryUser.display ? queryUser.display: queryUser.email} </span>
                                     {""}
                                     on {" "}<span className = "name">{new Date (timestamp?.toDate()).toLocaleString()}</span>
-                                    </p>
+                                    </p> 
                                     </div>
 
                                 <div className = "modal_answer">
@@ -225,10 +226,10 @@ function Post(  {Id, question, timestamp, queryUser}
                             <div className = "modal_question">
                                 <h1>{question}</h1>
                                 <p>
-                                    asked by{" "} <span className = "name">{queryUser.displayName ? queryUser.displayName: queryUser.email} </span>
+                                    asked by{" "} <span className = "name">{queryUser.display ? queryUser.display: queryUser.email} </span>
                                     {""}
                                     on {" "}<span className = "name">{new Date (timestamp?.toDate()).toLocaleString()}</span>
-                                    </p>
+                                    </p>  
                                     </div>
 
                                 <div className = "modal_bid">
