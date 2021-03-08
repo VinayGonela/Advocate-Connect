@@ -39,44 +39,94 @@ function SpecificationsCard() {
 }
 export default SpecificationsCard;
 */
-
+ /*
 import React, { Component } from 'react';
 import { render } from 'react-dom';
 import DropDownMenu from 'material-ui/DropDownMenu';
 import MenuItem from 'material-ui/MenuItem';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+class SpecificationsCard  extends Component {
+        constructor(props) {
+          super(props);
+      
+          this.state = {
+            selectValue : " "
+          };
+          this.handleDropdownChange = this.handleDropdownChange.bind(this);
+        }
+      
+        handleDropdownChange(e) {
+          this.setState({ selectValue: e.target.value });
+        }
+
+       render() {
+    return (
+      <div>
+        <div>
+          <div>
+            <select id="dropdown" onChange={this.handleDropdownChange}>
+              <option value="N/A">N/A</option>
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+
+          <div>Selected value is : {this.state.selectValue}</div>
+        </div>
+      </div>
+    );
+  }
+}
+      
+      render(<SpecificationsCard />, document.getElementById('root'));
+      export default SpecificationsCard
+ */
+
+ /*    
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
 class SpecificationsCard  extends Component {
         constructor() {
           super();
       
           this.state = {
-            selection : 1
+            selection : " "
           };
           this.handleChange = this.handleChange.bind(this); 
         }
       
+      
         handleChange(event, index, value) {
           //set selection to the value selected
-          this.setState({ selection : value });
-      
+          console.log(value)
+         this.setState({ selection : value });
+      this.props.handleChange(value)
         }
+        
         render() {
         return (
           <div>
             <MuiThemeProvider>
             
          <DropDownMenu 
-                value={this.state.selection} 
+            var value={this.props.selection} 
                 onChange={this.handleChange}   
                >
-                <MenuItem value={1} primaryText="Family"  />
-                <MenuItem value={2} primaryText="Crime" />
-                <MenuItem value={3} primaryText="Property" />
-                <MenuItem value={4} primaryText="Cyber" />
-                <MenuItem value={5} primaryText="Employement"  />
-                <MenuItem value={6} primaryText="Banking" />
-                <MenuItem value={7} primaryText="Business" />
-                <MenuItem value={8} primaryText="Others" />
+                <MenuItem value="Family" primaryText="Family"  />
+                <MenuItem value="Crime" primaryText="Crime" />
+                <MenuItem value="Property" primaryText="Property" />
+                <MenuItem value="Cyber" primaryText="Cyber" />
+                <MenuItem value="Employement" primaryText="Employement"  />
+                <MenuItem value="Banking" primaryText="Banking" />
+                <MenuItem value="Business" primaryText="Business" />
+                <MenuItem value="Others" primaryText="Others" />
       
               </DropDownMenu>
               
@@ -87,4 +137,68 @@ class SpecificationsCard  extends Component {
       }
       
       render(<SpecificationsCard />, document.getElementById('root'));
+      export default SpecificationsCard
+      */
+     
+
+import React, { Component } from 'react';
+import { render } from 'react-dom';
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+
+class SpecificationsCard  extends Component {
+  
+    
+ 
+  handleChange = (e) => {
+    const val = e.target.value;
+    this.props.handleChange(val);
+    
+  };
+        
+        render() {
+          const { selection } = this.props;
+          
+        return (
+          <select value={selection} onChange={this.handleChange}>
+          <option value="Family">Family</option>
+          <option value="Crime">Crime</option>
+          <option value="Property">Property</option>
+          <option value="Cyber">Cyber</option>
+          <option value="Employement">Employement</option>
+          <option value="Banking">Banking</option>
+          <option value="Business">Business</option>
+          <option value="Others">Others</option>
+          
+        </select>
+      );
+    }
+  }
+  
+      //     <div>
+      //       <MuiThemeProvider>
+            
+      //    <DropDownMenu 
+      //       value={selection} onChange={this.handleChange}  
+      //          >
+      //           <MenuItem value="Family" primaryText="Family"  />
+      //           <MenuItem value="Crime" primaryText="Crime" />
+      //           <MenuItem value="Property" primaryText="Property" />
+      //           <MenuItem value="Cyber" primaryText="Cyber" />
+      //           <MenuItem value="Employement" primaryText="Employement"  />
+      //           <MenuItem value="Banking" primaryText="Banking" />
+      //           <MenuItem value="Business" primaryText="Business" />
+      //           <MenuItem value="Others" primaryText="Others" />
+      
+      //         </DropDownMenu>
+              
+      //         </MuiThemeProvider>
+      //         </div>
+      //     );
+      //   }
+       
+      // }
+      
+      // render(<SpecificationsCard />, document.getElementById('root'));
       export default SpecificationsCard

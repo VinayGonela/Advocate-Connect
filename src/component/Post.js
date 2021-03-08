@@ -5,7 +5,7 @@ import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineO
 import React, {useEffect, useState} from 'react';
 import "../css/Post.css";
 import Modal from "react-modal";
-import {setQuestionInfo, selectQuestionId,selectQuestionName} from "../features/questionSlice";
+import {setQuestionInfo, selectQuestionId,selectQuestionName,selectcategory } from "../features/questionSlice";               //changed for specification
 import {selectUser} from "../features/userSlice"
 import { useDispatch, useSelector } from "react-redux";
 import db from '../firebase';
@@ -15,7 +15,7 @@ import firebase from 'firebase'
 
 
 
-function Post(  {Id, question, timestamp, queryUser}
+function Post(  {Id, question, timestamp, queryUser,selection} //added a change for specifications
       ) {
 
         const user = useSelector(selectUser)
@@ -23,7 +23,8 @@ function Post(  {Id, question, timestamp, queryUser}
         const dispatch = useDispatch()
 
         const questionId = useSelector(selectQuestionId);
-        const questionName = useSelector(selectQuestionName)
+        const questionName = useSelector(selectQuestionName);
+        const category = useSelector(selectcategory)              //changed for specification
         const [answer, setAnswer] = useState("")
         const [getAnswer,setGetAnswer] = useState([]);
 
@@ -92,12 +93,14 @@ function Post(  {Id, question, timestamp, queryUser}
             setIsOpenModal(false);
           }; 
           console.log(queryUser)
+        //   console.log(selection)
           
     return (
         <div className="post"
             onClick= {()=> dispatch(setQuestionInfo({
                 questionId:Id,
-                questionName: question
+                questionName: question,
+                category : {selection}                //changed for specification
              } ))}
         >
 
@@ -107,6 +110,8 @@ function Post(  {Id, question, timestamp, queryUser}
             /> 
             <h5>{queryUser.display?queryUser.display:queryUser.email}</h5> 
             <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
+            <small>{Selection}</small> 
+            {/* specification changed above line */}
             </div>
             <div className="post_body">
                 <div className="post_question">
