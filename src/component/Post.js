@@ -186,7 +186,7 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
                                         right: "0px"
                                     }}
                                 >
-                                            <span style = {{color:"#b92b27"}}>
+                                            <span style = {{color: 'black'}}>
                                                 {answers.user.displayName
                                                 ? answers.user.displayName
                                                 :answers.user.email }  {" "}
