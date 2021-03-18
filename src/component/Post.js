@@ -5,7 +5,7 @@ import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineO
 import React, {useEffect, useState} from 'react';
 import "../css/Post.css";
 import Modal from "react-modal";
-import {setQuestionInfo, selectQuestionId,selectQuestionName,selectcategory } from "../features/questionSlice";               //changed for specification
+import {setQuestionInfo, selectQuestionId,selectQuestionName} from "../features/questionSlice";
 import {selectUser} from "../features/userSlice"
 import { useDispatch, useSelector } from "react-redux";
 import db from '../firebase';
@@ -15,7 +15,7 @@ import firebase from 'firebase'
 
 
 
-function Post(  {Id, question, timestamp, queryUser,selection} //added a change for specifications
+function Post(  {Id, question, timestamp, queryUser}
       ) {
 
         const user = useSelector(selectUser)
@@ -23,16 +23,15 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
         const dispatch = useDispatch()
 
         const questionId = useSelector(selectQuestionId);
-        const questionName = useSelector(selectQuestionName);
-        const category = useSelector(selectcategory)              //changed for specification
+        const questionName = useSelector(selectQuestionName)
         const [answer, setAnswer] = useState("")
         const [getAnswer,setGetAnswer] = useState([]);
 
         const [openIsModal, setIsOpenModal] = useState(false)
         const [bid, setBid] = useState("")
         const [getBid,setGetBid] = useState([]);
-//         let photo = queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"
-// console.log(photo)
+        let photo = queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"
+    console.log(photo)
         useEffect(() => {
             if (questionId) {
               db.collection("questions")
@@ -93,14 +92,12 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
             setIsOpenModal(false);
           }; 
           console.log(queryUser)
-        //   console.log(selection)
           
     return (
         <div className="post"
             onClick= {()=> dispatch(setQuestionInfo({
                 questionId:Id,
-                questionName: question,
-                category : {selection}                //changed for specification
+                questionName: question
              } ))}
         >
 
@@ -110,8 +107,6 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
             /> 
             <h5>{queryUser.display?queryUser.display:queryUser.email}</h5> 
             <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
-            <small>{Selection}</small> 
-            {/* specification changed above line */}
             </div>
             <div className="post_body">
                 <div className="post_question">
@@ -154,7 +149,7 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
                                 </div>
 
                                 <div className = "modal_button">
-                                <Button className = "cancel"onClick= {()=> setOpenModal(false)}>Close</Button>
+                                <Button className = "cancel" onClick= {()=> setOpenModal(false)}>Close</Button>
                                 <Button 
                                 onClick = {handleAnswer} 
                                 type = "submit" className= "add">Add Answer</Button>
@@ -186,9 +181,9 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
                                         right: "0px"
                                     }}
                                 >
-                                            <span style = {{color: 'black'}}>
-                                                {answers.user.displayName
-                                                ? answers.user.displayName
+                                            <span style = {{color:"#b92b27"}}>
+                                                {answers.user.display
+                                                ? answers.user.display
                                                 :answers.user.email }  {" "}
                                                 on  {" "}
                                                 {new Date(answers.timestamp?.toDate()).toLocaleDateString()}
@@ -246,7 +241,7 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
                                 </div>
 
                                 <div className = "modal_button">
-                                <Button className = "cancel"onClick= {()=> setIsOpenModal(false)}>Close</Button>
+                                <Button className = "cancel" onClick= {()=> setIsOpenModal(false)}>Close</Button>
                                 <Button 
                                 onClick = {handleBid} 
                                 type = "submit" className= "add">Add Bid</Button>
@@ -279,8 +274,8 @@ function Post(  {Id, question, timestamp, queryUser,selection} //added a change 
                                     }}
                                 >
                                             <span style = {{color:"#b92b27"}}>
-                                                {bids.user.displayName
-                                                ? bids.user.displayName
+                                                {bids.user.display
+                                                ? bids.user.display
                                                 :bids.user.email }  {" "}
                                                 on  {" "}
                                                 {new Date(bids.timestamp?.toDate()).toLocaleDateString()}

@@ -10,8 +10,8 @@ function QueryBox() {
     return (
         <div className= 'queryBox'>
             <div className='queryBox_info'>
-                <Avatar src={user.photo}/>
-            <p> Hello, {user.displayName ? user.displayName : user.email} </p>
+                <Avatar src={user.photo?user.photo:"https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"}/>
+            <p> Hello, {user.display ? user.display : user.email} </p>
             </div>
             <div className="queryBox_query">
 

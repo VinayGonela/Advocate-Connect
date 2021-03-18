@@ -4,7 +4,7 @@ function WidgetContent() {
     return (
         <div align = "right" className="widget__contents">
           <div align = "right" className="widget__content"> 
-           <h4>...Stay tuned...</h4>
+           <h4>Comming Soon...</h4>
             </div>
 
         </div>

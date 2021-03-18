@@ -1,60 +1,99 @@
-import React, { useState }from 'react';
+import React, { useState } from 'react';
 import "./Login.css"
 import { auth, provider } from "../../firebase";
+import { Link , useHistory } from "react-router-dom";
+ 
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    // const [User, setUser] = useState("");
+    // const [EmailError, setEmailError] = useState("");
+    // const [PasswordError, setPasswordError] = useState("");
+
+    const clearInputs = () => {
+      setEmail('');
+      setPassword('');
+    }
+
+    // const clearErrors = () => {
+//   setEmailError('');
+//   setPasswordError('');
+// } 
   
     const signIn = () => {
       auth.signInWithPopup(provider).catch((e) => {
         alert(e.message);
       });
     };
-  
+   const history = useHistory()
+ 
     const handleSignIn = (e) => {
       e.preventDefault();
-  
-      auth
+      
+        auth
         .signInWithEmailAndPassword(email, password)
         .then((auth) => {
           console.log(auth);
+          // console.log("user",User);
+          // alert('Logged In Successfully');
+           history.replace("/")
+          clearInputs();
         })
-        .catch((e) => alert(e.message));
-        setEmail("");
-        setPassword("")
+        .catch((err) => {
+          alert('User Not Found ! please Register');
+          clearInputs(); 
+          // switch (err.code) {
+          //   case "auth/invalid-email":
+          //   case "auth/user-disabled":
+          //   case "auth/user-not-found":
+          //     // setEmailError(err.message);
+          //     break;
+          //   case "auth/wrong-password":
+          //     // setPasswordError(err.message);
+          //     break;
+          //     // no default
+          //     setEmail("");
+          //     setPassword("")
+          // }
+        }
+      );  
+        
     };
   
-    const registerSignIn = (e) => {
-      e.preventDefault();
-  
-      auth
-        .createUserWithEmailAndPassword(email, password)
-        .then((auth) => {
-          if (auth) {
-            console.log(auth);
-          }
-        })
-        .catch((e) => alert(e.message));
-        setEmail("");
-        setPassword("")
-    };
-    return (
-        <div className="login">
-          
-          <div className="login__container">
-            <div className="login__logo">
+   return (
+        <div className="hero">
+        <form className="form">
+        <h1 className="head">LOGIN</h1>
+            <input type="text" 
+            id="input-field" 
+            name="email"
+            placeholder="Email Id"
+            onChange={(e) => setEmail(e.target.value)} 
+            value={email}
+            />
+        
+             <input type="password" 
+            id="input-field" 
+            name="password"
+            onChange={(e) => setPassword(e.target.value)}
+            placeholder="Enter Password"
+            value={password} 
+            />
+            
+             <input type="checkbox" className="check-box" /><span>Remember Password</span>
+            <button className="submit" onClick={handleSignIn}>Login</button>
+            <div className="link">Not a member? <span ><Link to="/Register"><big>Register</big></Link></span></div>
+        
+            {/* <div className="login__logo">
               <img
-                src=""
+                src="User.photo"
                 alt=""
               />
-            </div>
-            <div className="login__desc">
-              <p>A Platform to find an Advocate for Legal Advices</p>
-              
-            </div>
-            <div className="login__auth">
-              <div className="login__authOptions">
+            </div> */}
+          
+         <div className="login__auth">
+            <div className="login__authOptions">
                 <div className="login__authOption">
                   <img
                     className="login__googleAuth"
@@ -62,76 +101,24 @@ function Login() {
                     alt=""
                   />
                   <p onClick={signIn}>Continue With Google</p>
-                </div>
-                <div className="login__authOption">
+                  
+               {/* <div className="login__auth">
+                  <div className="login__authOption">
                   <img
                     className="login__googleAuth"
-                    src="https://1000logos.net/wp-content/uploads/2016/11/Facebook-logo-500x350.png"
+                    src="./facebook.png"
                     alt=""
                   />
-                  <span>Continue With Facebook</span>
+                  <span><p>Continue With Facebook</p></span>
                 </div>
-                <div className="login__authDesc">
-                  <p>
-                    <span style={{ color: "blue", cursor: "pointer" }}>
-                      Sign Up With Email
-                    </span>
-                    . By continuing you indicate that you have read and agree to
-                    Advocate Connect's
-                    <span style={{ color: "blue", cursor: "pointer" }}>
-                      Terms of Service{" "}
-                    </span>
-                    and{" "}
-                    <span style={{ color: "blue", cursor: "pointer" }}>
-                      Privacy Policy
-                    </span>
-                    .
-                  </p>
+                  </div> */}
+                  
                 </div>
               </div>
-              <div className="login__emailPass">
-                <div className="login__label">
-                  <h4>Login</h4>
-                </div>
-                <div className="login__inputFields">
-                  <div className="login__inputField">
-                    <input
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      type="text"
-                      placeholder="Email"
-                    />
-                  </div>
-                  <div className="login__inputField">
-                    <input
-                      value={password}
-                      onChange={(e) => setPassword(e.target.value)}
-                      type="password"
-                      placeholder="Password"
-                    />
-                  </div>
-                </div>
-                <div className="login__forgButt">
-                  <small>Forgot Password?</small>
-                  <button onClick={handleSignIn}>Login</button>
-                </div>
-                <button onClick={registerSignIn}>Register</button>
-              </div>
             </div>
-            
-            <div className="login__footer">
-              <p>About</p>
-              
-              <p>Careers</p>
-              <p>Businesses</p>
-              <p>Privacy</p>
-              <p>Terms</p>
-              <p>Contact</p>
-              <p>&copy; Advocate Connect. 2021</p>
-            </div>
-          </div>
-        </div>
-      );
-    }
+        </form>
+      </div>
+    );
+}
 
-export default Login
+export default Login;

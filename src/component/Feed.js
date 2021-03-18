@@ -32,7 +32,6 @@ return (
                         question= {questions.question}
                         timestamp= {questions.timestamp}
                         queryUser = {questions.user}
-                        category = {questions.category} //changed here for specifications
                     />
                 
                 ))
