@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px;
-    background-color: white;
+    background-color:rgb(116, 126, 107);
     border:1px solid lightgray;
     border-radius: 5px;
     margin-top: 10px;
@@ -95,7 +95,8 @@
 .modal_answer{
     display:flex;
     padding-top:20px;
-    flex:1
+    flex:1;
+   
 }
 
 .modal_answer> textarea{

@@ -14,7 +14,8 @@ import SpecificationsCard from "./SpecificationsCard";
 import Specifications from "./Specifications";
 import advocate1 from './advocate1.png';
 import LabelIcon from '@material-ui/icons/Label';
-
+import DropDownMenu from 'material-ui/DropDownMenu';
+import MenuItem from 'material-ui/MenuItem';
 
 
 
@@ -25,6 +26,7 @@ function Navbar() {
     const [input,setInput] = useState("")
     const[modalOpen, setModalOpen] = useState(false)
     const[modalIsOpen, setModalIsOpen] = useState(false)
+    const [selection, setSelection] = useState("")
     const handleQuestion = (e) => {
         e.preventDefault()
 
@@ -36,11 +38,29 @@ function Navbar() {
             question: input,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
             user: user,
+            category: {selection}
         })
 
         setInput("")
     }
+
+   
+    // //specifications
+    // constructor() 
+        
     
+    //     this.state = {
+    //       selection : " "
+    //     };
+    //     this.handleChange = this.handleChange.bind(this); 
+    //   }
+    
+    //   handleChange(event, index, value) 
+    //     //set selection to the value selected
+    //     this.setState({ selection : value });
+    
+    //   //specifications
+      
     return (
         <div className = 'aHeader'>
             <div className= 'img_Logo'>
@@ -107,7 +127,7 @@ Advocate Connect</p>
                             </div>         
 
                             <div className = "category_button">
-                            <Button className = "cancel" onClick= {()=> setModalIsOpen(false)}>Close</Button>
+                            <Button className = "cancel"onClick= {()=> setModalIsOpen(false)}>Close</Button>
                             </div>
                         </Modal>
                     </div>
@@ -137,7 +157,7 @@ Advocate Connect</p>
                             
                             </div>
                             <div className = "category_button">
-                            <Button className = "cancel" onClick= {()=> setModalOpen(false)}>Close</Button>
+                            <Button className = "cancel"onClick= {()=> setModalOpen(false)}>Close</Button>
                             </div>
                         </Modal>
                     </div>
@@ -157,7 +177,6 @@ Advocate Connect</p>
                             isOpen = {openModal}
                             onRequestClose = {() => setOpenModal(false)}
                             shouldCloseOnOverlayClick={false}
-                   
                             style = {{
                                 overlay:{
                                 width:700,
@@ -177,11 +196,26 @@ Advocate Connect</p>
                                     <Avatar className="avatar"
                                             src={user.photo}
                                     />
-                                    <h5>asking a question as  {user.display?user.display:user.email} </h5>
+                                    <h5>asking a question as  {user.displayName?user.displayName:user.email} </h5>
                                     <div className = "modal_scope">
                                         <LabelIcon />
-                                        <SpecificationsCard />
+                                        <p>{selection}</p>
+                                        <SpecificationsCard handleChange={setSelection} selection={selection} />
                                         
+                                        {/* <DropDownMenu 
+            var value={this.state.selection} 
+                onChange={this.handleChange}   
+               >
+                <MenuItem value="Family" primaryText="Family"  />
+                <MenuItem value="Crime" primaryText="Crime" />
+                <MenuItem value="Property" primaryText="Property" />
+                <MenuItem value="Cyber" primaryText="Cyber" />
+                <MenuItem value="Employement" primaryText="Employement"  />
+                <MenuItem value="Banking" primaryText="Banking" />
+                <MenuItem value="Business" primaryText="Business" />
+                <MenuItem value="Others" primaryText="Others" />
+      
+              </DropDownMenu> */}
                                     </div>
                                 </div>
                                 <div className = "modal_field">

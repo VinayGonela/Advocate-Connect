@@ -17,6 +17,7 @@ function Feed() {
               snapshot.docs.map((doc) => ({
                 id: doc.id,
                 questions: doc.data(),
+                category:doc.selection,         //changed here for specifications
               }))
             )
           );
@@ -32,6 +33,7 @@ return (
                         question= {questions.question}
                         timestamp= {questions.timestamp}
                         queryUser = {questions.user}
+                        category = {questions.category} //changed here for specifications
                     />
                 
                 ))

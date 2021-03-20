@@ -1,21 +1,20 @@
 
 import { Avatar,Button } from '@material-ui/core';
 import ShareOutlinedIcon from '@material-ui/icons/ShareOutlined';
-import ChatBubbleOutlineOutlinedIcon from '@material-ui/icons/ChatBubbleOutlineOutlined';
 import React, {useEffect, useState} from 'react';
 import "../css/Post.css";
 import Modal from "react-modal";
-import {setQuestionInfo, selectQuestionId,selectQuestionName} from "../features/questionSlice";
+import {setQuestionInfo, selectQuestionId,selectQuestionName,selectCategory } from "../features/questionSlice";               //changed for specification
 import {selectUser} from "../features/userSlice"
 import { useDispatch, useSelector } from "react-redux";
 import db from '../firebase';
 import firebase from 'firebase'
+import { black } from 'material-ui/styles/colors';
 
 
 
 
-
-function Post(  {Id, question, timestamp, queryUser}
+function Post(  {Id, question, timestamp, queryUser,selection} //added a change for specifications
       ) {
 
         const user = useSelector(selectUser)
@@ -23,15 +22,16 @@ function Post(  {Id, question, timestamp, queryUser}
         const dispatch = useDispatch()
 
         const questionId = useSelector(selectQuestionId);
-        const questionName = useSelector(selectQuestionName)
+        const questionName = useSelector(selectQuestionName);
+        const category = useSelector(selectCategory)              //changed for specification
         const [answer, setAnswer] = useState("")
         const [getAnswer,setGetAnswer] = useState([]);
 
         const [openIsModal, setIsOpenModal] = useState(false)
         const [bid, setBid] = useState("")
         const [getBid,setGetBid] = useState([]);
-        let photo = queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"
-    console.log(photo)
+//         let photo = queryUser.photo ? queryUser.photo : "https://wallpapersdsc.net/wp-content/uploads/2016/10/River-Images.jpg"
+// console.log(photo)
         useEffect(() => {
             if (questionId) {
               db.collection("questions")
@@ -92,12 +92,14 @@ function Post(  {Id, question, timestamp, queryUser}
             setIsOpenModal(false);
           }; 
           console.log(queryUser)
-          
+        //   console.log(selection)
+        
     return (
         <div className="post"
             onClick= {()=> dispatch(setQuestionInfo({
                 questionId:Id,
-                questionName: question
+                questionName: question,
+                category : {selection}                //changed for specification
              } ))}
         >
 
@@ -107,6 +109,9 @@ function Post(  {Id, question, timestamp, queryUser}
             /> 
             <h5>{queryUser.display?queryUser.display:queryUser.email}</h5> 
             <small>{new Date(timestamp?.toDate()).toLocaleString()}</small>
+            <small>category</small>
+            {/* specification changed above line*/}
+            
             </div>
             <div className="post_body">
                 <div className="post_question">
@@ -127,7 +132,8 @@ function Post(  {Id, question, timestamp, queryUser}
                                 top:"55%",
                                 left:"45%",
                                 marginTop: "-300px",
-                                marginLeft:"-350px"
+                                marginLeft:"-350px",
+                                fontSize:"small"
                             },
                                  }}
                         >
@@ -145,14 +151,14 @@ function Post(  {Id, question, timestamp, queryUser}
                                     required
                                     value = {answer}
                                     onChange={(e)=> setAnswer(e.target.value)}
-                                    placeholder = "Enter Your Answer..." type ="text"/>
+                                    placeholder = "Enter Your Answer..." type ="text" />
                                 </div>
 
                                 <div className = "modal_button">
                                 <Button className = "cancel" onClick= {()=> setOpenModal(false)}>Close</Button>
                                 <Button 
                                 onClick = {handleAnswer} 
-                                type = "submit" className= "add">Add Answer</Button>
+                                fontSize="small" type = "submit" className= "add">Add Answer</Button>
                                 </div>
                                 
                            
@@ -165,7 +171,7 @@ function Post(  {Id, question, timestamp, queryUser}
                             <p
                             key = {id}
                             style = {{position: "relative",
-                            paddingBottom:"5px"}}>
+                            paddingBottom:"5px", fontSize:"small"}}>
                             {
                                 Id === answers.questionId ? (
                                 <span>
@@ -181,9 +187,9 @@ function Post(  {Id, question, timestamp, queryUser}
                                         right: "0px"
                                     }}
                                 >
-                                            <span style = {{color:"#b92b27"}}>
-                                                {answers.user.display
-                                                ? answers.user.display
+                                            <span style = {{color:black}}>
+                                               answered by {answers.user.displayName
+                                                ? answers.user.displayName
                                                 :answers.user.email }  {" "}
                                                 on  {" "}
                                                 {new Date(answers.timestamp?.toDate()).toLocaleDateString()}
@@ -219,7 +225,8 @@ function Post(  {Id, question, timestamp, queryUser}
                                 top:"55%",
                                 left:"45%",
                                 marginTop: "-300px",
-                                marginLeft:"-350px"
+                                marginLeft:"-350px",
+                                fontSize:"small"
                             },
                                  }}
                         >
@@ -241,7 +248,7 @@ function Post(  {Id, question, timestamp, queryUser}
                                 </div>
 
                                 <div className = "modal_button">
-                                <Button className = "cancel" onClick= {()=> setIsOpenModal(false)}>Close</Button>
+                                <Button className = "cancel"onClick= {()=> setIsOpenModal(false)}>Close</Button>
                                 <Button 
                                 onClick = {handleBid} 
                                 type = "submit" className= "add">Add Bid</Button>
@@ -257,7 +264,7 @@ function Post(  {Id, question, timestamp, queryUser}
                             <p
                             key = {id}
                             style = {{position: "relative",
-                            paddingBottom:"5px"}}>
+                            paddingBottom:"5px", fontSize:"small"}}>
                             {
                                 Id === bids.questionId ? (
                                 <span>
@@ -273,9 +280,9 @@ function Post(  {Id, question, timestamp, queryUser}
                                         right: "0px"
                                     }}
                                 >
-                                            <span style = {{color:"#b92b27"}}>
-                                                {bids.user.display
-                                                ? bids.user.display
+                                            <span style = {{color:black}}>
+                                              bid added by {bids.user.displayName
+                                                ? bids.user.displayName
                                                 :bids.user.email }  {" "}
                                                 on  {" "}
                                                 {new Date(bids.timestamp?.toDate()).toLocaleDateString()}
