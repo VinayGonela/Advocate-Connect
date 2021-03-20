@@ -91,7 +91,7 @@ function Login() {
               </div>
               <div className="login__emailPass">
                 <div className="login__label">
-                  <h4>Login</h4>
+                  
                 </div>
                 <div className="login__inputFields">
                   <div className="login__inputField">

@@ -3,7 +3,7 @@
     flex-direction: column;
     padding: 10px;
     border: 1px solid lightgray;
-    background-color: rgb(48, 8, 25);
+    background-color: rgb(155, 108, 128);
     border-radius: 5px;
     cursor: pointer;
 }
@@ -27,7 +27,7 @@
     margin-top: 8px;
 }
 .queryBox_query > p{
-    color: grey;
+    color: rgb(39, 66, 55);
     font-weight: bold;
     font-size: large;
 }

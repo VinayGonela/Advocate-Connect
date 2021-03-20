@@ -8,7 +8,7 @@
     border: 1px solid lightgray;
     border-radius: 5px;
     max-height: 85vh;
-    background-color: white;
+    background-color: rgb(120, 128, 80);
   }
   .widget__header {
     border-bottom: 1px solid lightgray;
